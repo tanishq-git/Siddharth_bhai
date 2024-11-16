@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Verdana', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden; /* To prevent scrollbars from appearing */
+        }
+
+        .birthday-container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Birthday message style */
+        .birthday-message {
+            font-size: 3rem;
+            color: #ff66b2;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            margin: 0;
+        }
+
+        /* Sub-message style */
+        .sub-message {
+            font-size: 1.2rem;
+            color: #4b4b4b;
+            margin-top: 15px;
+        }
+
+        /* Button style */
+        .celebrate-btn {
+            background-color: #ff66b2;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .celebrate-btn:hover {
+            background-color: #ff3385;
+        }
+
+        /* Animation for fading in text */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Confetti styles */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff4500;
+            opacity: 0;
+            animation: confetti-fall 3s forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-50px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .birthday-message {
+                font-size: 2rem; /* Smaller font on mobile */
+            }
+
+            .sub-message {
+                font-size: 1rem; /* Adjust sub-message size for mobile */
+            }
+
+            .celebrate-btn {
+                font-size: 1rem; /* Adjust button font size */
+                padding: 10px 20px; /* Adjust padding on smaller screens */
+            }
+
+            /* Ensure birthday container is always centered */
+            .birthday-container {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .birthday-message {
+                font-size: 1.8rem; /* Even smaller on smaller mobile screens */
+            }
+
+            .celebrate-btn {
+                font-size: 0.9rem; /* Smaller button text for very small screens */
+                padding: 8px 15px; /* Adjust padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="birthday-container">
+        <h1 class="birthday-message">🎂 Happy Birthday, [Siddharth Bhai]! 🎉</h1>
+        <p class="sub-message">May your day be filled with love and joy.</p>
+        <button class="celebrate-btn" onclick="triggerConfetti()">Celebrate!</button>
+    </div>
+    <div class="confetti" id="confetti"></div>
+
+    <script>
+        // Function to trigger the confetti animation
+        function triggerConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const colors = ['#ff6347', '#ff69b4', '#ffff00', '#32cd32', '#00bfff'];
+
+            // Create a random number of confetti pieces (between 50 and 150)
+            let numberOfConfetti = Math.floor(Math.random() * 100) + 50;
+
+            // Loop to create confetti pieces
+            for (let i = 0; i < numberOfConfetti; i++) {
+                const confetti = document.createElement('div');
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const xPosition = Math.random() * window.innerWidth;
+                const animationDelay = Math.random() * 2;
+
+                // Style confetti pieces
+                confetti.classList.add('confetti-piece');
+                confetti.style.backgroundColor = color;
+                confetti.style.left = `${xPosition}px`;
+                confetti.style.animationDelay = `${animationDelay}s`;
+
+                confettiContainer.appendChild(confetti);
+            }
+        }
+    </script>
+</body>
+</html>
